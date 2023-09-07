@@ -44,16 +44,15 @@ selection:
         popl %ecx
         popl %esi
 
-        // troca esi elemento com o menor elemento
+        // Troca esi elemento com o menor elemento
         movl (%esi), %ebx
         xchgl (%eax), %ebx
         movl %ebx, (%esi)
 
-        // decrementa o tamanho do vetor
-        // e aponta esi para o prox. elemento
+        // Decrementa o tamanho do vetor
+        // e aponta esi para o próx. elemento
         addl $4, %esi
-        decl %ecx
-        jnz selection_loop
+        loop selection_loop
 
     popl %ebp
     ret
