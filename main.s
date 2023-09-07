@@ -8,12 +8,11 @@
 
     pushl $vetor
     pushl $8
-    call input
-    addl $8, %esp # Align stack
 
-    pushl $vetor
-    pushl $8
+    call input
+    call selection
     call output
+
     addl $8, %esp # Align stack
 
     // Exit Syscall

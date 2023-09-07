@@ -1,4 +1,4 @@
-sources = main.s io.s
+sources = main.s io.s selection.s
 
 main: main.o 
 	# Criar executável de 32bits em sistema de 64bits
