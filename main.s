@@ -1,24 +1,24 @@
 .global _start
 
 .section .data
-    vetor: .int -4, 10, 3, 45, 1 
+    prompt: .asciz "Digite 5 números: "
+    vetor: .int 0, 0, 0, 0 
 
 .section .text
     _start:
     
-    pushl $vetor
-    pushl $5
-    call output
-    addl $8, %esp
+    pushl $prompt
+    call printf
+    addl $4, %esp
 
     pushl $vetor
     pushl $5
+
+    call input
+    call output
     call heap_sort
-    addl $12, %esp
-
-    pushl $vetor
-    pushl $5
     call output
+
     addl $8, %esp
 
     // Exit Syscall
