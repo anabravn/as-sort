@@ -1,7 +1,7 @@
 .global _start
 
 .section .data
-    vetor: .int 4, 10, 3, 45, 1 
+    vetor: .int -4, 10, 3, 45, 1 
 
 .section .text
     _start:
@@ -13,7 +13,7 @@
 
     pushl $vetor
     pushl $5
-    call heap_build
+    call heap_sort
     addl $12, %esp
 
     pushl $vetor

@@ -26,67 +26,52 @@ heap_build:
         popl %ecx
         popl %edi
 
-        loop heap_build_loop
+        decl %ecx
+        cmp $0, %ecx
+        jge heap_build_loop
 
     heap_build_end:
         popl %ebp
         ret
 
-/*
 heap_sort:
+
     pushl %ebp
     movl %esp, %ebp
 
     movl 8(,%ebp,), %ecx # Tamanho do vetor
     movl 12(,%ebp,), %edi # Endereço do vetor
 
-    movl %ecx, %edx
+    pushl %edi
+    pushl %ecx
+    call heap_build
+    popl %ecx
+    addl $4, %esp
 
     heap_sort_loop:
-        cmpl $1, %ecx
-        je heap_sort_end
-
-        # Troca primeiro e ultimo elemento
-        movl (%edi, %ecx, 4), %ebx
-        xchgl %ebx, (%edi)
-        movl %ebx, (%edi, %ecx, 4)
-
-        pushl %edi
-        pushl %edx
-
-        call heapify
-
-        popl %edx
-        popl %edi
-
-        loop heap_sort_loop
-
-    heap_sort_end:
-        popl %ebp
-        ret
-
-
-
-
-    heap_loop:
+        // Troca primeiro e ultimo elemento
         movl (%edi), %eax
-        xchgl %eax, -4(%edi, %ecx, 4)
+        xchgl -4(%edi, %ecx, 4), %eax
         movl %eax, (%edi) 
+
+        decl %ecx
 
         pushl %edi
         pushl $0
         pushl %ecx
 
         call heapify
-        addl $12, %esp
 
+        popl %ecx
+        addl $8, %esp
 
-        loop heap_loop
-   heap_end:
+        cmp $0, %ecx
+        jg heap_sort_loop
+
+   heap_sort_end:
         popl %ebp
         ret
 
-*/
 
 heapify:
     pushl %ebp
