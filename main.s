@@ -1,19 +1,25 @@
 .global _start
 
 .section .data
-    vetor: .int 0, 0, 0, 0, 0, 0, 0, 0
+    vetor: .int 4, 10, 3, 45, 1 
 
 .section .text
     _start:
+    
+    pushl $vetor
+    pushl $5
+    call output
+    addl $8, %esp
 
     pushl $vetor
-    pushl $8
+    pushl $5
+    call heap_build
+    addl $12, %esp
 
-    call input
-    call selection
+    pushl $vetor
+    pushl $5
     call output
-
-    addl $8, %esp # Align stack
+    addl $8, %esp
 
     // Exit Syscall
     movl $1, %eax # Syscall number
