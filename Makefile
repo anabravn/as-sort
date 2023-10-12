@@ -1,6 +1,6 @@
-sources = main.s io.s selection.s heap.s util.s
+sources = main.s io.s selection.s heap.s util.s comb.s
 
-main: main.o 
+main: main.o $(sources)
 	# Criar executável de 32bits em sistema de 64bits
 	ld main.o /usr/lib32/libc.so \
 		-dynamic-linker /usr/lib/ld-linux.so.2 \

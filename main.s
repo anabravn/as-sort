@@ -30,7 +30,7 @@ _start:
     pushl size
 
     call input
-    call heap_sort
+    call bubble_sort
     call output
 
     addl $4, %esp
