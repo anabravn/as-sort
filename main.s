@@ -1,27 +1,42 @@
 .global _start
 
 .section .data
-    prompt: .asciz "Digite 5 números: "
-    vetor: .int 0, 0, 0, 0 
+    prompt: .asciz "Tamanho: "
+    fmt_scanf: .asciz " %d"
+    fmt_printf: .asciz "Digite %d números:\n"
+    size: .int 0
 
 .section .text
-    _start:
-    
-    pushl $prompt
+
+_start:
+    pushl $prompt 
     call printf
     addl $4, %esp
 
-    pushl $vetor
-    pushl $5
+    pushl $size
+    pushl $fmt_scanf
+    call scanf
+    addl $8, %esp
+
+    pushl size
+    pushl $fmt_printf
+    call printf
+    addl $4, %esp
+
+    call alloc_array
+    addl $4, %esp
+
+    pushl %eax
+    pushl size
 
     call input
-    call output
     call heap_sort
     call output
 
-    addl $8, %esp
+    addl $4, %esp
 
-    // Exit Syscall
-    movl $1, %eax # Syscall number
-    movl $0, %ebx # Exit status
-    int $0x80
+    call free
+    addl $4, %esp
+
+    pushl $0
+    call exit
