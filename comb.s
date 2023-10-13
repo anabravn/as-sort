@@ -44,6 +44,52 @@ bubble_sort:
         popl %ebp
         ret
 
+comb_sort:
+    pushl %ebp
+    movl %esp, %ebp
+
+    movl 8(%ebp), %edx # Tamanho do vetor
+    movl 12(%ebp), %esi # Endereço do vetor
+
+    movl %edx, gap_value
+    call update_gap
+
+
+    // Enquanto %ebx < %edx
+    comb_outer:
+        movl gap_value, %ecx
+        cmpl $0, %ecx
+        jle comb_end
+
+        xorl %ebx, %ebx
+
+        comb_inner:
+             // Comparar elemento i com elemento j
+            movl (%esi, %ecx, 4), %eax
+            cmpl (%esi, %ebx, 4), %eax
+            jge comb_inner_continue
+
+            // Trocar elementos
+            xchgl (%esi, %ebx, 4), %eax
+            movl %eax, (%esi, %ecx, 4)
+
+            comb_inner_continue:
+
+            incl %ecx
+            incl %ebx
+
+            cmpl %edx, %ecx
+            jl comb_inner
+
+    comb_outer_continue:
+        call update_gap
+        jmp comb_outer
+
+    comb_end:
+        popl %ebp
+        ret
+
+
 update_gap:
     // Fator de encolhimento
     movl $shrink_factor, %ebx

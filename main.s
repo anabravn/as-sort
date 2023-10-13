@@ -30,7 +30,7 @@ _start:
     pushl size
 
     call input
-    call bubble_sort
+    call comb_sort
     call output
 
     addl $4, %esp
