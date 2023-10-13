@@ -5,6 +5,8 @@
 
 .section .text
 
+// TODO: Adicionar teste para parar se não trocou nenhum elemento
+
 bubble_sort:
     pushl %ebp
     movl %esp, %ebp
@@ -43,6 +45,7 @@ bubble_sort:
     bubble_end:
         popl %ebp
         ret
+
 
 comb_sort:
     pushl %ebp
