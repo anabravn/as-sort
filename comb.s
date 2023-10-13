@@ -58,7 +58,7 @@ comb_sort:
     call update_gap
 
 
-    // Enquanto %ebx < %edx
+    // Enquanto gap_value > 0
     comb_outer:
         movl gap_value, %ecx
         cmpl $0, %ecx
@@ -66,8 +66,9 @@ comb_sort:
 
         xorl %ebx, %ebx
 
+        // Enquanto %ecx < %edx
         comb_inner:
-             // Comparar elemento i com elemento j
+            // Comparar elemento i com elemento j
             movl (%esi, %ecx, 4), %eax
             cmpl (%esi, %ebx, 4), %eax
             jge comb_inner_continue
@@ -84,7 +85,6 @@ comb_sort:
             cmpl %edx, %ecx
             jl comb_inner
 
-    comb_outer_continue:
         call update_gap
         jmp comb_outer
 
