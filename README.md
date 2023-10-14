@@ -7,4 +7,4 @@ Diferentes algoritmos de ordenação implementados para o GNU Assembler, desenvo
 - Comb Sort
 
 ## TODO
-- [ ] Interface de seleção de algoritmos
+- [x] Interface de seleção de algoritmos
