@@ -27,7 +27,7 @@ min:
     // Retorna endereço do menor elemento em eax
     ret
   
-selection:
+selection_sort:
     pushl %ebp
     movl %esp, %ebp
 
